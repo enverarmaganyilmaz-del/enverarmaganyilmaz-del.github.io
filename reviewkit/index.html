@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReviewKit for Flutter | Store Submission Playbook</title>
+<meta name="description" content="A downloadable store submission playbook for Flutter developers, built from real App Store review problems.">
+<meta property="og:title" content="ReviewKit for Flutter">
+<meta property="og:description" content="Ship Flutter apps with the store review work already mapped.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Review log layout: each real rejection sits beside the part of the kit that addresses it. */
+  :root {
+    --paper: #F3F6F4; --sheet: #FFFFFF; --ink: #10231F; --muted: #52665F; --line: #CCD8D2;
+    --teal: #0B6E60; --teal-soft: #D9EFE9; --red: #B3362B; --red-soft: #F8E0DC;
+    --display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+    --body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #0E1816; --sheet: #15231F; --ink: #E9F2EE; --muted: #9EB2AA; --line: #2B3F39;
+      --teal: #5FD3BE; --teal-soft: #173B34; --red: #FF9B8E; --red-soft: #40211D; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding-block: 20px; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 20px; }
+  .pill { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: center; padding-block: 36px 56px; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 6vw, 62px); line-height: 1.02; margin: 0 0 18px; text-wrap: balance; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; margin: 0 0 10px; text-wrap: balance; }
+  .lead { color: var(--muted); font-size: 19px; max-width: 54ch; margin: 0 0 24px; }
+  .cta { display: inline-block; background: var(--teal); color: var(--paper); font-weight: 600; text-decoration: none; border-radius: 8px; padding: 13px 20px; }
+  .small { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+  .log { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 18px; font-family: var(--mono); font-size: 13.5px; }
+  .log div { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; padding-block: 9px; border-bottom: 1px solid var(--line); }
+  .log div:last-child { border-bottom: 0; }
+  .code { color: var(--red); }
+  section { padding-block: 44px; border-top: 1px solid var(--line); }
+  .sub { color: var(--muted); max-width: 60ch; margin: 0 0 24px; }
+  .pairs { display: grid; gap: 10px; }
+  .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .pair b { font-weight: 600; display: block; }
+  .tag { font-family: var(--mono); font-size: 12px; color: var(--muted); display: block; margin-bottom: 2px; }
+  ul.list { columns: 2; column-gap: 32px; padding-left: 20px; margin: 0; }
+  ul.list li { break-inside: avoid; margin-bottom: 8px; }
+  .offer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; background: var(--teal-soft); border-radius: 12px; padding: 24px; }
+  .price { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; }
+  footer { color: var(--muted); font-size: 14px; padding-block: 28px 44px; border-top: 1px solid var(--line); }
+  a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  @media (max-width: 760px) {
+    .hero, .offer { grid-template-columns: minmax(0, 1fr); }
+    .pair { grid-template-columns: minmax(0, 1fr); }
+    ul.list { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="brand">ReviewKit</span>
+    <span class="pill">Instant download</span>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Stop rediscovering store review rules in Flutter</h1>
+      <p class="lead">A downloadable playbook with checklists, review notes and rejection replies, built from real App Store review problems across a portfolio of shipped apps.</p>
+      <a class="cta" href="#early-access" data-checkout>Get the playbook</a>
+      <p class="small">PDF delivered after purchase. No approval guarantee.</p>
+    </div>
+    <aside class="log" aria-label="Examples of real review issues">
+      <div><span class="code">2.1(a)</span><span>Onboarding button unresponsive on iPad</span></div>
+      <div><span class="code">2.1(a)</span><span>Error page at launch</span></div>
+      <div><span class="code">2.1(b)</span><span>Subscription entry point not reachable</span></div>
+      <div><span class="code">4.3</span><span>Asked to prove the app is not spam</span></div>
+      <div><span class="code">91064</span><span>Privacy manifest tracking mismatch</span></div>
+      <div><span class="code">Rating</span><span>Advertising missing from age rating</span></div>
+    </aside>
+  </header>
+
+  <section>
+    <h2>Each problem becomes a reusable part</h2>
+    <p class="sub">The playbook shows what to check before you submit.</p>
+    <div class="pairs">
+      <div class="pair"><div><span class="tag">Problem</span><b>System prompts interrupt a required button</b></div><div><span class="tag">In the playbook</span><b>A safe prompt order for first launch</b></div></div>
+      <div class="pair"><div><span class="tag">Problem</span><b>Subscription terms are incomplete</b></div><div><span class="tag">In the playbook</span><b>Paywall checklist and disclosure template</b></div></div>
+      <div class="pair"><div><span class="tag">Problem</span><b>Users cannot delete their account</b></div><div><span class="tag">In the playbook</span><b>Account deletion flow and Firebase example</b></div></div>
+      <div class="pair"><div><span class="tag">Problem</span><b>Data reaches an AI provider without consent</b></div><div><span class="tag">In the playbook</span><b>AI consent text and cost check</b></div></div>
+      <div class="pair"><div><span class="tag">Problem</span><b>Screenshots use the wrong size or show debug banners</b></div><div><span class="tag">In the playbook</span><b>Screenshot checklist and Flutter capture tips</b></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you get</h2>
+    <p class="sub">A PDF you can use on your next release.</p>
+    <ul class="list">
+      <li>Pre-submission checklist</li>
+      <li>First-launch prompt order</li>
+      <li>Paywall and subscription checklist</li>
+      <li>Account deletion flow</li>
+      <li>AI consent and cost checks</li>
+      <li>Ads, privacy and age rating notes</li>
+      <li>Screenshot and metadata checklist</li>
+      <li>App Review notes template</li>
+      <li>Rejection reply templates</li>
+      <li>Quick symptom reference</li>
+    </ul>
+  </section>
+
+  <section id="early-access">
+    <div class="offer">
+      <div>
+        <h2>ReviewKit Early Access</h2>
+        <p class="sub" style="margin:0">One-time purchase. Includes the PDF now. The planned Flutter code kit will be a free update for early buyers when it is released.</p>
+        <p class="small">No approval guarantee. Store rules change, and each app is reviewed on its own.</p>
+      </div>
+      <div>
+        <div class="price">$59</div>
+        <a class="cta" href="#early-access" data-checkout style="margin-top:12px">Get the playbook</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>ReviewKit is an independent project. Not affiliated with Apple, Google, Flutter or RevenueCat. Contact: enverarmaganyilmaz@gmail.com</footer>
+</div>
+</body>
+</html>
